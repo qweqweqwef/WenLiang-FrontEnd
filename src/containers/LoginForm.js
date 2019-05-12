@@ -35,7 +35,7 @@ export default class LoginForm extends React.Component{
 
         axios({
             method:"POST",
-            url:"http://nameless-sierra-39544.herokuapp.com/api/v1/users/login",
+            url:"https://nameless-sierra-39544.herokuapp.com/api/v1/users/login",
             data:formData,
             config: { headers:{'Content-Type': 'multipart/form-data'}}
         }).then(result=>{
@@ -63,7 +63,7 @@ export default class LoginForm extends React.Component{
         return(
            <div class="signup">
         
-        <Form onSubmit={this.handleSubmit} class="">
+        <Form onSubmit={this.handleSubmit}>
             <h2 class="signup-text">Log In</h2>
         
             <FormGroup class="testing">

@@ -35,7 +35,7 @@ handleChange = (e) =>{
         formData.set('email',this.state.email)
          axios({
              method:"POST",
-             url:"http://nameless-sierra-39544.herokuapp.com/api/v1/users/new",
+             url:"https://nameless-sierra-39544.herokuapp.com/api/v1/users/new",
              data:formData,
              config:{ headers : {'Content-Type' : 'multipart/form-data'}}
          }).then((result)=>{

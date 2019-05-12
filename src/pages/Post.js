@@ -29,7 +29,7 @@ export default class Post extends React.Component{
             formData.append('desc',this.state.desc)
             axios({
                 method:"POST",
-                url:"http://nameless-sierra-39544.herokuapp.com/api/v1/blogs/new",
+                url:"https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/new",
                 data:formData,
                 headers: {
                     'Authorization' : 'Bearer ' + localStorage.getItem("jwt-token"),
