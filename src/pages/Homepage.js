@@ -16,7 +16,7 @@ class Homepage extends React.Component {
     componentDidMount(){
         Promise.all([
         axios.get("http://api.worldweatheronline.com/premium/v1/weather.ashx?key=4e7479f8bdd049b790f61643190505&q=Kuala%20Lumpur&format=json&num_of_days=1"),
-        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/")
+        axios.get("http://nameless-sierra-39544.herokuapp.com/api/v1/blogs/")
         ]).then(result=>{
             console.log(result);
             this.setState({

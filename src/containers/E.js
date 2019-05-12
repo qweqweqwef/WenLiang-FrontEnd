@@ -12,7 +12,7 @@ class E extends React.Component {
         }
     }
     componentDidMount(){
-        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/"+this.state.blog_title)
+        axios.get("http://nameless-sierra-39544.herokuapp.com/api/v1/blogs/"+this.state.blog_title)
         .then(result=>{
             this.setState({
                 blog_desc:result.data.data.desc,
@@ -27,7 +27,7 @@ class E extends React.Component {
         formData.append('blog_title',this.state.blog_title)
         formData.append('blog_desc',this.state.blog_desc)
 
-        axios.post("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/edit", formData, {
+        axios.post("http://nameless-sierra-39544.herokuapp.com/api/v1/blogs/edit", formData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt-token'),
                 'Content-Type': 'multipart/form-data'

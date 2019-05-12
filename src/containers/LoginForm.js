@@ -35,7 +35,7 @@ export default class LoginForm extends React.Component{
 
         axios({
             method:"POST",
-            url:"https://nameless-sierra-39544.herokuapp.com/api/v1/users/login",
+            url:"http://nameless-sierra-39544.herokuapp.com/api/v1/users/login",
             data:formData,
             config: { headers:{'Content-Type': 'multipart/form-data'}}
         }).then(result=>{
