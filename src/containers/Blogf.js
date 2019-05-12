@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogP from './BlogP'
+import BlogP from '../containers/BlogP'
 
 const Blog = (props) =>{
     let title = props.match.params.blogtitle

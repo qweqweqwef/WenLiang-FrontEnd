@@ -14,12 +14,13 @@ class Homepage extends React.Component {
     }
 
     componentDidMount(){
-        axios.get("https://api.worldweatheronline.com/premium/v1/weather.ashx?key=4e7479f8bdd049b790f61643190505&q=Kuala%20Lumpur&format=json&num_of_days=1")
-        .then(result=>{
-            
+        Promise.all([
+        axios.get("https://api.worldweatheronline.com/premium/v1/weather.ashx?key=4e7479f8bdd049b790f61643190505&q=Kuala%20Lumpur&format=json&num_of_days=1"),
+        axios.get("http://localhost:5000/api/v1/blogs/")
+        ]).then(result=>{
             this.setState({
-                city:result.data.data.request[0].query,
-                time:result.data.data.weather[0].date
+                city:result[0].data.data.request[0].query,
+                time:result[0].data.data.weather[0].date
             })
         })
     }
@@ -31,7 +32,7 @@ class Homepage extends React.Component {
         const { blogs } = this.state
         return ( 
                 <div className="Api">
-                    {city},{time}
+                    City:{city}, Date:{time}
                     <Container>
                         <Row>
                         {blogs.map(blog=>

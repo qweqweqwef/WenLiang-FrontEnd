@@ -9,6 +9,7 @@ export default class LoginForm extends React.Component {
         this.state = { 
                 email:"",
                 password:"",
+                current_user:"",
                 redirect:false,
          }
     }
@@ -38,9 +39,13 @@ export default class LoginForm extends React.Component {
         }).then(result=>{
             if(result.data.status){
                 console.log(result);
+                localStorage.setItem('id', result.data.data.id)
+                localStorage.setItem('username',result.data.data.username)
                 localStorage.setItem("jwt-token",result.data.access_token)
+                localStorage.setItem('refresh_tok',result.data.refresh_token)
                 this.setState({
-                    redirect:true
+                    redirect:true,
+                    current_user:localStorage.getItem('username')
                 })
             }
         })
@@ -48,7 +53,7 @@ export default class LoginForm extends React.Component {
     render(){ 
         if(this.state.redirect){
             return(
-                <Redirect push to={"/" + this.state.current_user}/>
+                <Redirect push to={"/user/" + this.state.current_user}/>
             )
         }
         return (  

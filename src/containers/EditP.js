@@ -8,17 +8,14 @@ class Edit extends React.Component {
         super(props);
         this.state = { 
             blog_title:this.props.title,
-            blog_d:"",
+            blog_desc:"",
             blog_id:""
          }
     }
 
     handleChange = (e) => {
-        let target = e.target
-        let value  = target.value
-        let name   = target.name
         this.setState({
-            [name] : value
+            [e.target.name]:e.target.value
         })
     }
 
@@ -27,7 +24,7 @@ class Edit extends React.Component {
 
         .then(result=>{
             this.setState({
-                bog_d:result.data.data.desc,
+                blog_desc:result.data.data.desc,
                 blog_id:result.data.data.id,
             })
         })
@@ -38,10 +35,10 @@ class Edit extends React.Component {
         let formData = new FormData()
         formData.append('blog_id',this.state.blog_id)
         formData.append('blog_title',this.state.blog_title)
-        formData.append('blog_d',this.state.blog_d)
+        formData.append('blog_desc',this.state.blog_desc)
 
         axios.post('http://localhost:5000/api/v1/blogs/edit', formData ,{
-            headers: {  'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            headers: {  'Authorization': 'Bearer ' + localStorage.getItem('jwt-token'),
                         'Content-Type': 'multipart/form-data' }
         }).then(result=>{
             if(result.data.status){

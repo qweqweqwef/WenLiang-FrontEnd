@@ -1,29 +1,25 @@
 import React from "react";
+import { Container , Row , Col,Input } from 'reactstrap'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Container , Row , Col,Input } from 'reactstrap'
 
+export default class Post extends React.Component{
+    constructor(props){
+        super(props)
 
-class Post extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
+        this.state = {
             title:"",
-            d:"",
-            change:false,
-         }
+            desc:"",
+            redirect:false
+        }
     }
-
     handleChange = (e) =>{
-        let target = e.target
-        let value  = target.value
-        let name   = target.name
         this.setState({
-            [name]:value
+            [e.target.name] : e.target.value
         })
+        
     }
-
-
+   
     handleSubmit = (e) =>{
         e.preventDefault()
         if(this.state.title && this.state.desc){
@@ -31,33 +27,30 @@ class Post extends React.Component {
             formData.append('user_id',localStorage.getItem('id'))
             formData.append('title',this.state.title)
             formData.append('desc',this.state.desc)
-
             axios({
                 method:"POST",
-                url:"http://localhost:5000/api/v1/users/blogs/new",
+                url:"http://localhost:5000/api/v1/blogs/new",
                 data:formData,
                 headers: {
-                    'Authorization' : 'Bearer ' + localStorage.getItem("token"),
+                    'Authorization' : 'Bearer ' + localStorage.getItem("jwt-token"),
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(result=>{
                 if(result.data.status){
                     this.setState({
-                        change:true
+                        redirect:true
                     })
                 }
             })
         }
-    
     }
-    render() { 
-        if(this.state.change){
+    render(){
+        if(this.state.redirect){
             return(
                 <Redirect to={"/user/"+localStorage.getItem('username')}/>
             )
         }
-        
-        return ( 
+        return(
             <Container>
                 <Row>
                     <Col lg={10} xs={12}className="d-flex justify-content-center align-item-center">
@@ -77,8 +70,6 @@ class Post extends React.Component {
                     </Col>
                 </Row>
             </Container>
-         );
+        )
     }
 }
- 
-export default Post;

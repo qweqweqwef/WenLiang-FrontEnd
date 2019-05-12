@@ -7,15 +7,15 @@ class Navbar extends React.Component {
         super(props);
         this.state = {     
             current_user:'',
-            Login:false
+            signedin:false
         }
     }
 
     componentDidMount(){
-        if(localStorage.getItem('id')){
+        if(localStorage.getItem('jwt-token')){
             this.setState({
                 current_user:localStorage.getItem('username'),
-                isLogin:true
+                signedin:true
             })
         }
     }
@@ -27,13 +27,12 @@ class Navbar extends React.Component {
 
     render() { 
         return(
-        <div>
+        <>
             {this.state.signedin?
             <div className="Navbar">
                 <Layout>
                     <Header>
-                        <HeaderRow title="RandomBlog">
-                        </HeaderRow>
+                        <HeaderRow title={"RandomBlog / "+`${this.state.current_user}`}/>
                         <HeaderRow>
                             <Navigation>
                                 <a href={`/user/${this.state.current_user}`}>Home</a> 
@@ -48,8 +47,7 @@ class Navbar extends React.Component {
             <div className="Navbar">
                 <Layout>
                     <Header>
-                        <HeaderRow title="RandomBlog">
-                        </HeaderRow>
+                        <HeaderRow title="RandomBlog / Havent Login"/>
                         <HeaderRow>
                             <Navigation>
                                 <a href={`/`}>Home</a>
@@ -60,7 +58,7 @@ class Navbar extends React.Component {
                     </Header>
                 </Layout>
             </div>}
-        </div>
+        </>
          )
     }
 }

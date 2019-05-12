@@ -39,7 +39,7 @@ class Profile extends React.Component {
 
         axios.post("http://localhost:5000/api/v1/users/edit" , formData,{
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt-token'),
                 'Content-Type': 'multipart/form-data'
             }
         }).then(result => {
