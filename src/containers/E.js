@@ -12,7 +12,7 @@ class E extends React.Component {
         }
     }
     componentDidMount(){
-        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/"this.state.blog_title)
+        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/"+this.state.blog_title)
         .then(result=>{
             this.setState({
                 blog_desc:result.data.data.desc,
