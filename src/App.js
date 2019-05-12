@@ -1,16 +1,26 @@
-import React from 'react';
-import './App.css';
-import Navbar from '../src/containers/Navbar'
-import Routing from './component/Routing';
+import React , { Component }from 'react';
+import Navbar from '../src/containers/Navbar';
+import Main from './component/Main'
 
 
-function App() {
-  return (
-    <div>
-      <Navbar/>
-      <Routing/>
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+    }
+  }
+  
+
+  render(){
+
+    return(
+      <div className="background-app">
+        <Navbar/>
+        <Main/>
+      </div>
+    )
+  }
 }
 
 export default App;

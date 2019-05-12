@@ -15,18 +15,18 @@ class Homepage extends React.Component {
 
     componentDidMount(){
         Promise.all([
-        axios.get("https://api.worldweatheronline.com/premium/v1/weather.ashx?key=4e7479f8bdd049b790f61643190505&q=Kuala%20Lumpur&format=json&num_of_days=1"),
-        axios.get("http://localhost:5000/api/v1/blogs/")
+        axios.get("http://api.worldweatheronline.com/premium/v1/weather.ashx?key=4e7479f8bdd049b790f61643190505&q=Kuala%20Lumpur&format=json&num_of_days=1"),
+        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/")
         ]).then(result=>{
+            console.log(result);
             this.setState({
                 city:result[0].data.data.request[0].query,
-                time:result[0].data.data.weather[0].date
+                time:result[0].data.data.weather[0].date,
+                blogs:result[1].data.data
             })
         })
     }
     render() { 
-        console.log(this.state.city);
-        console.log(this.state.time);
         const { city } = this.state
         const { time } = this.state
         const { blogs } = this.state
@@ -40,7 +40,7 @@ class Homepage extends React.Component {
                                 <div className="blog-post">
                                     <h4>{blog.parent_user}</h4>
                                     <a href={`/blog/${blog.title}`}>{blog.title}</a>
-                                    <p>{blog.d}</p>
+                                    <p>{blog.desc}</p>
                                 </div>
                             </Col>
                             )}

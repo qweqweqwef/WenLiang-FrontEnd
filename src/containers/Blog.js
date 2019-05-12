@@ -1,9 +1,9 @@
 import React from 'react'
-import BlogP from '../containers/BlogP'
+import B from '../containers/B'
 
 const Blog = (props) =>{
     let title = props.match.params.blogtitle
-    return <BlogP title={title}/>
+    return <B title={title}/>
 }
 
 export default Blog

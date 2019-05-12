@@ -17,8 +17,10 @@ export default class B extends React.Component{
             check:false,
         }
     }
+    
     componentDidMount(){
-        axios.get("http://localhost:5000/api/v1/blogs/"+this.state.blog_title)
+        // axios.get("http://localhost:5000/api/v1/blogs/"+this.state.blog_title)
+        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs"+this.state.blog_title)
         .then(result=>{
             this.setState({
                 blog_parent_user:result.data.data.parent_user,
@@ -33,7 +35,7 @@ export default class B extends React.Component{
         e.preventDefault()
         let formData = new FormData()
         formData.set('blog_id', this.state.blog_id)
-        axios.post("http://localhost:5000/api/v1/blogs/delete",formData,{
+        axios.post("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/delete",formData,{
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
             }
@@ -70,3 +72,5 @@ export default class B extends React.Component{
         )
     }
 }
+
+

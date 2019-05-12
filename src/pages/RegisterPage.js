@@ -1,9 +1,9 @@
-import React from'react'
-import SignupForm from '../containers/SignupForm'
+import React from 'react'
+import RegisterForm from '../containers/RegisterForm';
 
-class Signup extends React.Component {
-    render() { 
-        return ( 
+export default class Register extends React.Component{
+    render(){
+        return(
             <div style={{height:'100vh',margin:'auto'}}>
                 <div className="container">
                     <div className="row">
@@ -11,13 +11,11 @@ class Signup extends React.Component {
                             <div className="d-flex justify-content-center align-items-center lead display-3">Register Now</div>
                         </div>
                         <div className="col col-lg-12">
-                            <SignupForm/>
+                            <RegisterForm/>
                         </div>
                     </div>
                 </div>
             </div>
-         );
+        )
     }
 }
- 
-export default Signup;

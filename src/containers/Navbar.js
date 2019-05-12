@@ -12,7 +12,7 @@ class Navbar extends React.Component {
     }
 
     componentDidMount(){
-        if(localStorage.getItem('jwt-token')){
+        if(localStorage.getItem('id')){
             this.setState({
                 current_user:localStorage.getItem('username'),
                 signedin:true
@@ -35,10 +35,10 @@ class Navbar extends React.Component {
                         <HeaderRow title={"RandomBlog / "+`${this.state.current_user}`}/>
                         <HeaderRow>
                             <Navigation>
-                                <a href={`/user/${this.state.current_user}`}>Home</a> 
-                                <a href={`/user/${this.state.current_user}/post`}>Post</a>
-                                <a href={`/user/${this.state.current_user}/profile`}>Profile</a>
-                                <a href="/" onClick={this.Logout}>Logout</a>
+                                 <a href={`/user/${this.state.current_user}`}><strong>Home</strong></a>
+                                <a href={`/user/${this.state.current_user}/post`}><strong>Post</strong></a>
+                                <a href={`/user/${this.state.current_user}/account`}><strong>Account</strong></a>
+                                <  a href="/" onClick={this.Logout}><strong>Logout</strong></a>
                             </Navigation>
                         </HeaderRow>
                     </Header>
@@ -50,9 +50,9 @@ class Navbar extends React.Component {
                         <HeaderRow title="RandomBlog / Havent Login"/>
                         <HeaderRow>
                             <Navigation>
-                                <a href={`/`}>Home</a>
-                                <a href={`/login`}>Login</a>
-                                <a href={`/signup`}>Signup</a>
+                                <a href="/"><strong>Home</strong></a>
+                                <a href="/login"><strong>Login</strong></a>
+                                <a href="/register"><strong>Register</strong></a>
                             </Navigation>
                         </HeaderRow>
                     </Header>

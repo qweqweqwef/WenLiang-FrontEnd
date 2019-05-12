@@ -1,17 +1,19 @@
 import React from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Form,  Label, Input, } from 'reactstrap';
+import { Col,Form, FormGroup, Label, Input, NavLink ,Button } from 'reactstrap';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-export default class LoginForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-                email:"",
-                password:"",
-                current_user:"",
-                redirect:false,
-         }
+export default class LoginForm extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.state = {
+            username:"",
+            password:'',
+            redirect:false,
+            current_user:""
+        }
     }
 
     handleChange = (e) => {
@@ -22,56 +24,79 @@ export default class LoginForm extends React.Component {
         this.setState({
             [name]:value
         })
-        
+
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
         let formData = new FormData()
-        formData.set("email",this.state.email)
+        formData.set("username",this.state.username)
         formData.set("password",this.state.password)
 
         axios({
             method:"POST",
-            url:"http://localhost:5000/api/v1/users/login",
+            url:"https://nameless-sierra-39544.herokuapp.com/api/v1/users/login",
             data:formData,
-            config: {headers:{'Content-Type': 'multipart/form-data'}}
+            config: { headers:{'Content-Type': 'multipart/form-data'}}
         }).then(result=>{
             if(result.data.status){
-                console.log(result);
                 localStorage.setItem('id', result.data.data.id)
                 localStorage.setItem('username',result.data.data.username)
-                localStorage.setItem("jwt-token",result.data.access_token)
+                localStorage.setItem('jwt-token',result.data.access_token)
                 localStorage.setItem('refresh_tok',result.data.refresh_token)
-                this.setState({
+                this.setState({  
                     redirect:true,
                     current_user:localStorage.getItem('username')
                 })
+                
+                
+                
             }
         })
     }
-    render(){ 
+    render(){
         if(this.state.redirect){
             return(
-                <Redirect push to={"/user/" + this.state.current_user}/>
+                <Redirect to={"/user/"+this.state.current_user}/>
             )
         }
-        return (  
-            <Form className="login-form" onSubmit={this.handleSubmit}>
-                <Label>Email</Label>
-                <Input type="email" name="email" onChange={this.handleChange}/>
+        return(
+           <div class="signup">
+        
+        <Form onSubmit={this.handleSubmit} class="">
+            <h2 class="signup-text">Log In</h2>
+        
+            <FormGroup class="testing">
+            <Col sm={20}>
+            <Label>Username</Label>
+            <Input name="username" type="username"  onChange={this.handleChange}></Input>
+            </Col>
+            </FormGroup>
 
-                <Label>Password</Label>
-                <Input type="password" name="password" onChange={this.handleChange}/>
+            <FormGroup class="testing">
+            <Col sm={20}>
+            <Label>Password</Label>
+            <Input name="password" type="password"  onChange={this.handleChange}></Input>
+            </Col>
+            </FormGroup>
 
-                <div>
-                    {this.state.email && this.state.password ?
-                    <button type="submit">Login</button> :
-                    <button type="submit" disabled>Login</button>}
-                </div>
+            <FormGroup check row >
+            <Col sm={{ size: 10, offset: 3 }}>
+            { this.state.username && this.state.password ?
+            <Button type="submit">login</Button>:
+            <Button type="submit" disabled>login</Button>
+            }
 
-                <a href="/signup">Don't have an account ? Click Here</a>
-            </Form>
+            </Col>
+            </FormGroup>
+            <Col sm={{ size: 40, offset: 0 }}>
+            <Router>
+            <a href="/signup">Dont Have An Account?  Click Here</a>
+            </Router>
+            </Col>
+        </Form>
+
+    </div>
         )
     }
 }

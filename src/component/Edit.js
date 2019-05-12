@@ -1,9 +1,9 @@
 import React from 'react'
-import EditP from '../containers/EditP'
+import E from '../containers/E'
 
 const Edit = (props) => {
     let title=props.match.params.blogtitle
-    return(<EditP title={title}/>)
+    return(<E title={title}/>)
 }
 
 export default Edit

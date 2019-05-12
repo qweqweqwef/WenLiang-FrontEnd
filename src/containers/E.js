@@ -1,27 +1,18 @@
 import React from 'react'
-import axios from 'axios'
 import { Container,Row ,Col,Input} from 'reactstrap'
+import axios from 'axios'
 
-
-class Edit extends React.Component {
+class E extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
             blog_title:this.props.title,
             blog_desc:"",
             blog_id:""
-         }
+        }
     }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]:e.target.value
-        })
-    }
-
     componentDidMount(){
-        axios.get('http://localhost:5000/api/v1/blogs/')
-
+        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/"this.state.blog_title)
         .then(result=>{
             this.setState({
                 blog_desc:result.data.data.desc,
@@ -29,26 +20,36 @@ class Edit extends React.Component {
             })
         })
     }
-
-    handleSubmit = (e) =>{
+    handleSubmit = (e) => {
         e.preventDefault()
         let formData = new FormData()
         formData.append('blog_id',this.state.blog_id)
         formData.append('blog_title',this.state.blog_title)
         formData.append('blog_desc',this.state.blog_desc)
 
-        axios.post('http://localhost:5000/api/v1/blogs/edit', formData ,{
-            headers: {  'Authorization': 'Bearer ' + localStorage.getItem('jwt-token'),
-                        'Content-Type': 'multipart/form-data' }
+        axios.post("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/edit", formData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt-token'),
+                'Content-Type': 'multipart/form-data'
+            }
         }).then(result=>{
             if(result.data.status){
-                alert("Edited")
+                alert("succesfully edited")
             }
         })
     }
+  handleChange = (e) =>{
+     let target =e.target;
+     let value = target.value;
+     let name = target.name;
+
+     this.setState({
+         [name]:value
+     })
+ }
     render() { 
         return ( 
-            <div>
+            <>
             <Container>
                 <Row>
                     <Col lg={10} xs={12}className="d-flex justify-content-center align-item-center">
@@ -68,9 +69,9 @@ class Edit extends React.Component {
                     </Col>
                 </Row>
             </Container>
-            </div>
-         );
+            </>
+        );
     }
 }
- 
-export default Edit;
+
+export default E;
