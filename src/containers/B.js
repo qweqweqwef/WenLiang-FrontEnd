@@ -13,14 +13,14 @@ export default class B extends React.Component{
             blog_desc:"",
             blog_id:"",
             redirect:false,
-            current_user:"",
             check:false,
+            current_user:"",
         }
     }
     
     componentDidMount(){
         // axios.get("http://localhost:5000/api/v1/blogs/"+this.state.blog_title)
-        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs"+this.state.blog_title)
+        axios.get("https://nameless-sierra-39544.herokuapp.com/api/v1/blogs/"+this.state.blog_title)
         .then(result=>{
             this.setState({
                 blog_parent_user:result.data.data.parent_user,
